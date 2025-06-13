@@ -185,6 +185,7 @@
   transition: transform 0.3s ease, background-color 0.4s;
   cursor: pointer;
   color: #000;
+  font-family: "Lexend", sans-serif;
 }
 
 .custom-section::before {
@@ -260,7 +261,7 @@
 
 .why-us-header h2 {
   font-size: 2.5rem;
-  color: #fff;
+  color: #fec62a;
   margin-bottom: 20px;
 }
 
