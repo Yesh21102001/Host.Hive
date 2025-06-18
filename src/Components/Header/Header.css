@@ -1,15 +1,18 @@
 .custom-navbar {
   background-color: #d0cec8;
+  color: #fec62a;
 }
 
 .nav-link {
   font-family: "Lexend", serif;
   font-weight: bold;
   text-decoration: none;
+  color: #fec62a;
 }
 
 .nav-item {
   font-weight: bold;
+  
 }
 
 .header {

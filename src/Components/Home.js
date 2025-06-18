@@ -174,9 +174,9 @@ const Home = () => {
 
       <section className="welcome-section py-5 bg-light text-center">
         <div className="container">
-          <h5 className="fw-bold text-uppercase mb-3">Welcome to</h5>
-          <h1 className="mb-3 heading">Host.Hive</h1>
-          <p className="lead mx-auto" style={{ maxWidth: "800px" }}>
+          <h5 className="fw-bold text-uppercase mb-3 animate">Welcome to</h5>
+          <h1 className="mb-3 heading animate">Host.Hive</h1>
+          <p className="lead mx-auto animate" style={{ maxWidth: "800px" }}>
             Host.Hive is the Web Design and Development Company in
             Visakhapatnam, India. We are since 2024, in web design and
             development and our motto is to develop, design websites and
@@ -188,7 +188,7 @@ const Home = () => {
       <section className="py-5 bg-white">
         <div className="container">
           <div className="row justify-content-center gx-4 gy-4">
-            <div className="col-md-6 col-lg-3 d-flex justify-content-center">
+            <div className="col-md-6 col-lg-3 d-flex justify-content-center animate">
               <div className="custom-section p-4 text-center">
                 <img
                   src={website}
@@ -253,11 +253,10 @@ const Home = () => {
           <div className="why-us-header animate">
             <h2>Why Host.Hive?</h2>
             <p>
-              Since 2008, we've been transforming ideas into digital reality.
-              With a 100+ strong team, 8000+ happy clients, and 10,000+ projects
-              delivered, we are proud to be ISO 9001:2015 certified. Our
-              commitment to quality and innovation has made us a trusted name in
-              app and web development.
+              Since 2024, we've been transforming ideas into digital reality.
+              With a 10+ strong team, 15+ happy clients, and 18+ projects
+              delivered. Our commitment to quality and innovation has made us a
+              trusted name in app and web development.
             </p>
           </div>
           <div className="achievement-cards">
@@ -273,6 +272,93 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      <section className="testimonial-section">
+        <div className="container">
+          <h2 className="section-title text-center mb-5 animate">
+            What Our Customers Say
+          </h2>
+
+          <div
+            id="testimonialCarousel"
+            className="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div className="carousel-inner">
+              {[
+                {
+                  name: "Priya Sharma",
+                  message:
+                    "Working with Host.Hive was a breeze. They brought my business idea to life beautifully.",
+                  img: "https://randomuser.me/api/portraits/women/44.jpg",
+                  stars: 5,
+                },
+                {
+                  name: "Rohan Mehta",
+                  message:
+                    "Amazing team! They handled everything with professionalism and creativity.",
+                  img: "https://randomuser.me/api/portraits/men/46.jpg",
+                  stars: 4,
+                },
+                {
+                  name: "Ananya Reddy",
+                  message:
+                    "Prompt service, beautiful design, and fantastic support. Highly recommend!",
+                  img: "https://randomuser.me/api/portraits/women/65.jpg",
+                  stars: 5,
+                },
+                {
+                  name: "Vikram Patel",
+                  message:
+                    "Loved the final website. The team exceeded expectations.",
+                  img: "https://randomuser.me/api/portraits/men/34.jpg",
+                  stars: 5,
+                },
+              ].map((review, index) => (
+                <div
+                  className={`carousel-item ${index === 0 ? "active" : ""}`}
+                  key={index}
+                >
+                  <div className="d-flex justify-content-center">
+                    <div className="testimonial-card text-center">
+                      <img
+                        src={review.img}
+                        alt={review.name}
+                        className="testimonial-img"
+                      />
+                      <p className="testimonial-message">"{review.message}"</p>
+                      <div className="testimonial-stars">
+                        {"★".repeat(review.stars)}
+                        {"☆".repeat(5 - review.stars)}
+                      </div>
+                      <h6 className="testimonial-name">– {review.name}</h6>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <button
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target="#testimonialCarousel"
+              data-bs-slide="prev"
+            >
+              <span className="carousel-control-prev-icon rounded-circle p-2 bg-dark"></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button
+              className="carousel-control-next"
+              type="button"
+              data-bs-target="#testimonialCarousel"
+              data-bs-slide="next"
+            >
+              <span className="carousel-control-next-icon rounded-circle p-2 bg-dark"></span>
+              <span className="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
