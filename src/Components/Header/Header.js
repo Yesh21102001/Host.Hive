@@ -1,77 +1,76 @@
 import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "../../Images/Logo.png";
 import "./Header.css";
-import { Link, useLocation } from "react-router-dom";
+
+// React Icons
+import {
+  FaHome,
+  FaInfoCircle,
+  FaServicestack,
+  FaBoxOpen,
+  FaImages,
+  FaPhoneAlt,
+} from "react-icons/fa";
 
 const Header = () => {
   const location = useLocation();
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Scroll to section when location changes
   useEffect(() => {
-    const hash = location.hash.replace("#", ""); 
-    if (hash) {
-      scrollToSection(hash);
-    }
+    const hash = location.hash.replace("#", "");
+    if (hash) scrollToSection(hash);
   }, [location]);
 
   return (
-    <nav className="navbar navbar-expand-lg">
-      <div className="container-fluid header">
-        <img src={Logo} alt="Bootstrap" width="130" height="80" />
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/#home">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/#about">
-                About
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/#services">
-                Services
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/#products">
-                Products
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/gallery">
-                Gallery
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/#contact">
-                Contact
-              </Link>
-            </li>
-          </ul>
+    <>
+      {/* ===== Desktop Header ===== */}
+      <header className="desktop-navbar">
+        <div className="container header-desktop-inner">
+          <img src={Logo} alt="Logo" className="logo-desktop" />
+          <nav className="nav-desktop">
+            <Link className="nav-link" to="/#home">Home</Link>
+            <Link className="nav-link" to="/#about">About</Link>
+            <Link className="nav-link" to="/#services">Services</Link>
+            <Link className="nav-link" to="/#products">Products</Link>
+            <Link className="nav-link" to="/gallery">Gallery</Link>
+            <Link className="nav-link" to="/#contact">Contact</Link>
+          </nav>
         </div>
-      </div>
-    </nav>
+      </header>
+
+      {/* ===== Mobile Header (logo only) ===== */}
+      <header className="mobile-header">
+        <div className="container header-mobile-inner">
+          <img src={Logo} alt="Logo" className="logo-mobile" />
+        </div>
+      </header>
+
+      {/* ===== Mobile Bottom Navigation ===== */}
+      <nav className="mobile-bottom-nav" aria-label="Mobile bottom navigation">
+        <Link to="/#home" className="bottom-link">
+          <FaHome />
+          <span>Home</span>
+        </Link>
+        
+        <Link to="/#products" className="bottom-link">
+          <FaBoxOpen />
+          <span>Products</span>
+        </Link>
+        <Link to="/gallery" className="bottom-link">
+          <FaImages />
+          <span>Gallery</span>
+        </Link>
+        <Link to="/#contact" className="bottom-link">
+          <FaPhoneAlt />
+          <span>Contact</span>
+        </Link>
+      </nav>
+    </>
   );
 };
 
