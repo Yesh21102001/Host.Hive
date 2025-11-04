@@ -23,6 +23,11 @@
   z-index: 1000;
 }
 
+.mobile-header,
+.mobile-bottom-nav {
+  display: none;
+}
+
 .header-desktop-inner {
   display: flex;
   align-items: center;
@@ -32,8 +37,7 @@
 }
 
 .logo-desktop {
-  height: 80px;
-  width: 80px;
+  width: 150px;
 }
 
 /* Desktop nav links */

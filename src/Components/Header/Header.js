@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Logo from "../../Images/Logo.png";
+import Logo from "../../Images/Host Hive.png";
 import "./Header.css";
 import { FaHome, FaBoxOpen, FaImages, FaPhoneAlt } from "react-icons/fa";
 
@@ -8,49 +8,37 @@ const Header = () => {
   const location = useLocation();
   const [active, setActive] = useState("#home");
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
-  };
-
   useEffect(() => {
-    // Update active state whenever location changes
     const { pathname, hash } = location;
-
-    if (pathname === "/gallery") {
-      setActive("/gallery");
-    } else if (hash) {
-      setActive(hash);
-      scrollToSection(hash.replace("#", ""));
-    } else {
-      setActive("#home");
-    }
+    if (pathname === "/gallery") setActive("/gallery");
+    else if (hash) setActive(hash);
+    else setActive("#home");
   }, [location]);
 
   return (
     <>
-      {/* ===== Desktop Header ===== */}
+      {/* Desktop Header */}
       <header className="desktop-navbar">
         <div className="container header-desktop-inner">
           <img src={Logo} alt="Logo" className="logo-desktop" />
           <nav className="nav-desktop">
-            <Link className="nav-link" to="/#home">Home</Link>
-            <Link className="nav-link" to="/#products">Products</Link>
-            <Link className="nav-link" to="/gallery">Gallery</Link>
-            <Link className="nav-link" to="/#contact">Contact</Link>
+            <Link to="/#home" className="nav-link"><FaHome /> Home</Link>
+            <Link to="/#products" className="nav-link"><FaBoxOpen /> Products</Link>
+            <Link to="/gallery" className="nav-link"><FaImages /> Gallery</Link>
+            <Link to="/#contact" className="nav-link"><FaPhoneAlt /> Contact</Link>
           </nav>
         </div>
       </header>
 
-      {/* ===== Mobile Header (Logo Only) ===== */}
+      {/* Mobile Header */}
       <header className="mobile-header">
         <div className="container header-mobile-inner">
           <img src={Logo} alt="Logo" className="logo-mobile" />
         </div>
       </header>
 
-      {/* ===== Mobile Bottom Navigation ===== */}
-      <nav className="mobile-bottom-nav" aria-label="Mobile bottom navigation">
+      {/* Mobile Bottom Nav */}
+      <nav className="mobile-bottom-nav">
         <Link
           to="/#home"
           className={`bottom-link ${active === "#home" ? "active" : ""}`}
