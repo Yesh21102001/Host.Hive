@@ -1,20 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../Images/Logo.png";
 import "./Header.css";
-
-// React Icons
-import {
-  FaHome,
-  FaInfoCircle,
-  FaServicestack,
-  FaBoxOpen,
-  FaImages,
-  FaPhoneAlt,
-} from "react-icons/fa";
+import { FaHome, FaBoxOpen, FaImages, FaPhoneAlt } from "react-icons/fa";
 
 const Header = () => {
   const location = useLocation();
+  const [active, setActive] = useState("#home");
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -22,8 +14,17 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const hash = location.hash.replace("#", "");
-    if (hash) scrollToSection(hash);
+    // Update active state whenever location changes
+    const { pathname, hash } = location;
+
+    if (pathname === "/gallery") {
+      setActive("/gallery");
+    } else if (hash) {
+      setActive(hash);
+      scrollToSection(hash.replace("#", ""));
+    } else {
+      setActive("#home");
+    }
   }, [location]);
 
   return (
@@ -34,8 +35,6 @@ const Header = () => {
           <img src={Logo} alt="Logo" className="logo-desktop" />
           <nav className="nav-desktop">
             <Link className="nav-link" to="/#home">Home</Link>
-            <Link className="nav-link" to="/#about">About</Link>
-            <Link className="nav-link" to="/#services">Services</Link>
             <Link className="nav-link" to="/#products">Products</Link>
             <Link className="nav-link" to="/gallery">Gallery</Link>
             <Link className="nav-link" to="/#contact">Contact</Link>
@@ -43,7 +42,7 @@ const Header = () => {
         </div>
       </header>
 
-      {/* ===== Mobile Header (logo only) ===== */}
+      {/* ===== Mobile Header (Logo Only) ===== */}
       <header className="mobile-header">
         <div className="container header-mobile-inner">
           <img src={Logo} alt="Logo" className="logo-mobile" />
@@ -52,22 +51,40 @@ const Header = () => {
 
       {/* ===== Mobile Bottom Navigation ===== */}
       <nav className="mobile-bottom-nav" aria-label="Mobile bottom navigation">
-        <Link to="/#home" className="bottom-link">
-          <FaHome />
-          <span>Home</span>
+        <Link
+          to="/#home"
+          className={`bottom-link ${active === "#home" ? "active" : ""}`}
+          onClick={() => setActive("#home")}
+        >
+          <div className="icon-wrapper"><FaHome /></div>
+          {active === "#home" && <span>Home</span>}
         </Link>
-        
-        <Link to="/#products" className="bottom-link">
-          <FaBoxOpen />
-          <span>Products</span>
+
+        <Link
+          to="/#products"
+          className={`bottom-link ${active === "#products" ? "active" : ""}`}
+          onClick={() => setActive("#products")}
+        >
+          <div className="icon-wrapper"><FaBoxOpen /></div>
+          {active === "#products" && <span>Products</span>}
         </Link>
-        <Link to="/gallery" className="bottom-link">
-          <FaImages />
-          <span>Gallery</span>
+
+        <Link
+          to="/gallery"
+          className={`bottom-link ${active === "/gallery" ? "active" : ""}`}
+          onClick={() => setActive("/gallery")}
+        >
+          <div className="icon-wrapper"><FaImages /></div>
+          {active === "/gallery" && <span>Gallery</span>}
         </Link>
-        <Link to="/#contact" className="bottom-link">
-          <FaPhoneAlt />
-          <span>Contact</span>
+
+        <Link
+          to="/#contact"
+          className={`bottom-link ${active === "#contact" ? "active" : ""}`}
+          onClick={() => setActive("#contact")}
+        >
+          <div className="icon-wrapper"><FaPhoneAlt /></div>
+          {active === "#contact" && <span>Contact</span>}
         </Link>
       </nav>
     </>
