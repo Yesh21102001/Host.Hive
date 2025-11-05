@@ -10,7 +10,7 @@ const Header = () => {
 
   useEffect(() => {
     const { pathname, hash } = location;
-    if (pathname === "/gallery") setActive("/gallery");
+    if (pathname === "/portfolio") setActive("/portfolio");
     else if (hash) setActive(hash);
     else setActive("#home");
   }, [location]);
@@ -22,10 +22,18 @@ const Header = () => {
         <div className="container header-desktop-inner">
           <img src={Logo} alt="Logo" className="logo-desktop" />
           <nav className="nav-desktop">
-            <Link to="/#home" className="nav-link"><FaHome /> Home</Link>
-            <Link to="/#products" className="nav-link"><FaBoxOpen /> Products</Link>
-            <Link to="/gallery" className="nav-link"><FaImages /> Gallery</Link>
-            <Link to="/#contact" className="nav-link"><FaPhoneAlt /> Contact</Link>
+            <Link to="/#home" className="nav-link">
+              <FaHome /> Home
+            </Link>
+            <Link to="/portfolio" className="nav-link">
+              <FaBoxOpen /> Portfolio
+            </Link>
+            <Link to="/gallery" className="nav-link">
+              <FaImages /> Gallery
+            </Link>
+            <Link to="/#contact" className="nav-link">
+              <FaPhoneAlt /> Contact
+            </Link>
           </nav>
         </div>
       </header>
@@ -44,17 +52,21 @@ const Header = () => {
           className={`bottom-link ${active === "#home" ? "active" : ""}`}
           onClick={() => setActive("#home")}
         >
-          <div className="icon-wrapper"><FaHome /></div>
+          <div className="icon-wrapper">
+            <FaHome />
+          </div>
           {active === "#home" && <span>Home</span>}
         </Link>
 
         <Link
-          to="/#products"
-          className={`bottom-link ${active === "#products" ? "active" : ""}`}
-          onClick={() => setActive("#products")}
+          to="/portfolio"
+          className={`bottom-link ${active === "/portfolio" ? "active" : ""}`}
+          onClick={() => setActive("/portfolio")}
         >
-          <div className="icon-wrapper"><FaBoxOpen /></div>
-          {active === "#products" && <span>Products</span>}
+          <div className="icon-wrapper">
+            <FaBoxOpen />
+          </div>
+          {active === "/portfolio" && <span>Portfolio</span>}
         </Link>
 
         <Link
@@ -62,7 +74,9 @@ const Header = () => {
           className={`bottom-link ${active === "/gallery" ? "active" : ""}`}
           onClick={() => setActive("/gallery")}
         >
-          <div className="icon-wrapper"><FaImages /></div>
+          <div className="icon-wrapper">
+            <FaImages />
+          </div>
           {active === "/gallery" && <span>Gallery</span>}
         </Link>
 
@@ -71,7 +85,9 @@ const Header = () => {
           className={`bottom-link ${active === "#contact" ? "active" : ""}`}
           onClick={() => setActive("#contact")}
         >
-          <div className="icon-wrapper"><FaPhoneAlt /></div>
+          <div className="icon-wrapper">
+            <FaPhoneAlt />
+          </div>
           {active === "#contact" && <span>Contact</span>}
         </Link>
       </nav>
