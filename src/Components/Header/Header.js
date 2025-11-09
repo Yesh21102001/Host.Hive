@@ -22,7 +22,7 @@ const Header = () => {
         <div className="container header-desktop-inner">
           <img src={Logo} alt="Logo" className="logo-desktop" />
           <nav className="nav-desktop">
-            <Link to="/#home" className="nav-link">
+            <Link to="/" className="nav-link">
               <FaHome /> Home
             </Link>
             <Link to="/portfolio" className="nav-link">
@@ -31,7 +31,7 @@ const Header = () => {
             <Link to="/gallery" className="nav-link">
               <FaImages /> Gallery
             </Link>
-            <Link to="/#contact" className="nav-link">
+            <Link to="/Contact" className="nav-link">
               <FaPhoneAlt /> Contact
             </Link>
           </nav>
@@ -81,14 +81,14 @@ const Header = () => {
         </Link>
 
         <Link
-          to="/#contact"
-          className={`bottom-link ${active === "#contact" ? "active" : ""}`}
-          onClick={() => setActive("#contact")}
+          to="/Contact"
+          className={`bottom-link ${active === "/Contact" ? "active" : ""}`}
+          onClick={() => setActive("/Contact")}
         >
           <div className="icon-wrapper">
             <FaPhoneAlt />
           </div>
-          {active === "#contact" && <span>Contact</span>}
+          {active === "/Contact" && <span>Contact</span>}
         </Link>
       </nav>
     </>
