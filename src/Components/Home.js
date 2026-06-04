@@ -279,9 +279,9 @@ const Home = () => {
               <div className="contact-item"><FaMapMarkerAlt /><span>Visakhapatnam, Andhra Pradesh, India</span></div>
             </div>
             <div className="social-links">
-              <a href="#"><FaLinkedin /></a>
-              <a href="#"><FaTwitter /></a>
-              <a href="#"><FaInstagram /></a>
+              <a href="javascript:void(0)"><FaLinkedin /></a>
+              <a href="javascript:void(0)"><FaTwitter /></a>
+              <a href="javascript:void(0)"><FaInstagram /></a>
             </div>
           </div>
           <form className="contact-form animate" onSubmit={handleSubmit}>
@@ -313,8 +313,8 @@ const Home = () => {
             <p>Experts in Execution. Delivering Excellence.</p>
           </div>
           <div className="footer-links">
-            <div className="fl-col"><strong>Services</strong><a href="#">Website Design</a><a href="#">E-Commerce</a><a href="#">Mobile Apps</a><a href="#">SEO</a></div>
-            <div className="fl-col"><strong>Company</strong><a href="#">About</a><a href="#">Portfolio</a><a href="#">Process</a><a href="#">Contact</a></div>
+            <div className="fl-col"><strong>Services</strong><a href="javascript:void(0)">Website Design</a><a href="javascript:void(0)">E-Commerce</a><a href="javascript:void(0)">Mobile Apps</a><a href="javascript:void(0)">SEO</a></div>
+            <div className="fl-col"><strong>Company</strong><a href="javascript:void(0)">About</a><a href="/Portfolio">Portfolio</a><a href="javascript:void(0)">Process</a><a href="javascript:void(0)">Contact</a></div>
           </div>
         </div>
         <div className="footer-bottom">

@@ -89,7 +89,7 @@ const Portfolio = () => {
                   <p className="project-subtitle">{project.subtitle}</p>
                   <p className="project-description">{project.description}</p>
 
-                  <a href="#" className="read-story">
+                  <a href="javascript:void(0)" className="read-story">
                     Read the story <FaArrowRight />
                   </a>
                 </div>
