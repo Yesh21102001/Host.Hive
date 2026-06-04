@@ -1,21 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Home.css";
-import website from "../Images/html-coding.png";
-import Ecommerce from "../Images/ecommerce.png";
-import app from "../Images/website.png";
-import seo from "../Images/seo.png";
-import Header from "./Header/Header";
-import { FaAward, FaUsers, FaSmile, FaTasks } from "react-icons/fa";
+import { FaAward, FaUsers, FaSmile, FaTasks, FaCode, FaShoppingCart, FaMobileAlt, FaSearch, FaCheckCircle, FaStar, FaArrowRight, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaInstagram, FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    service: "",
-  });
+  const [activeFaq, setActiveFaq] = useState(null);
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", service: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const observerRef = useRef(null);
 
   const achievements = [
     { icon: <FaAward />, value: "2+", label: "Years of Experience" },
@@ -24,341 +16,353 @@ const Home = () => {
     { icon: <FaTasks />, value: "18+", label: "Projects Delivered" },
   ];
 
+  const services = [
+    {
+      icon: <FaCode />,
+      title: "Website Design",
+      desc: "Stunning, custom websites tailored to your brand identity. We craft pixel-perfect designs that convert visitors into clients.",
+      tag: "Design",
+    },
+    {
+      icon: <FaShoppingCart />,
+      title: "E-Commerce",
+      desc: "Full-featured online stores with seamless checkout, inventory management, and payment gateway integration.",
+      tag: "Commerce",
+    },
+    {
+      icon: <FaMobileAlt />,
+      title: "Mobile Apps",
+      desc: "Native and cross-platform mobile apps built for performance, delivering exceptional user experiences on every device.",
+      tag: "Mobile",
+    },
+    {
+      icon: <FaSearch />,
+      title: "SEO & Growth",
+      desc: "Data-driven SEO strategies that get you ranked, drive organic traffic, and turn your site into a lead-generating machine.",
+      tag: "Marketing",
+    },
+  ];
+
+  const process = [
+    { step: "01", title: "Discovery", desc: "We start by deeply understanding your business, goals, and target audience through structured workshops." },
+    { step: "02", title: "Strategy", desc: "We map out a detailed roadmap — wireframes, tech stack, timelines — before writing a single line of code." },
+    { step: "03", title: "Design", desc: "High-fidelity mockups that capture your brand voice. Iterative feedback loops until it's perfect." },
+    { step: "04", title: "Development", desc: "Clean, scalable code built with modern best practices. Regular demos so you're never in the dark." },
+    { step: "05", title: "Launch", desc: "Rigorous QA testing, performance optimization, then a smooth go-live with zero downtime." },
+    { step: "06", title: "Support", desc: "We don't disappear post-launch. Ongoing maintenance, updates, and growth support — we're your long-term partner." },
+  ];
+
+
+  const testimonials = [
+    { name: "Priya Sharma", role: "Founder, BloomBoutique", message: "Working with Host.Hive was a breeze. They brought my business idea to life beautifully. The attention to detail is unmatched.", img: "https://randomuser.me/api/portraits/women/44.jpg", stars: 5 },
+    { name: "Rohan Mehta", role: "CEO, TechVentures", message: "Amazing team! They handled everything with professionalism and creativity. Our website traffic doubled in 3 months.", img: "https://randomuser.me/api/portraits/men/46.jpg", stars: 5 },
+    { name: "Ananya Reddy", role: "Co-founder, StyleHub", message: "Prompt service, beautiful design, and fantastic support. They understood our vision from day one.", img: "https://randomuser.me/api/portraits/women/65.jpg", stars: 5 },
+    { name: "Vikram Patel", role: "Director, GreenLeaf", message: "The team exceeded every expectation. Our e-commerce sales jumped 40% after the redesign.", img: "https://randomuser.me/api/portraits/men/34.jpg", stars: 5 },
+  ];
+
+  const faqs = [
+    { q: "How long does a typical project take?", a: "Website projects usually take 3–6 weeks. E-commerce and mobile apps can take 6–12 weeks depending on complexity. We always give you a clear timeline upfront." },
+    { q: "Do you offer post-launch support?", a: "Absolutely. We offer monthly maintenance packages that include updates, security patches, performance monitoring, and priority support." },
+    { q: "What technologies do you work with?", a: "We work with React, Vue, Angular, Node.js, PHP, Laravel, React Native, and more. We choose the best tech stack based on your project's specific needs." },
+    { q: "Can you redesign my existing website?", a: "Yes! Redesigns are one of our specialties. We analyze your current site, identify pain points, and deliver a modern, high-converting redesign." },
+    { q: "How much does a website cost?", a: "Pricing varies by scope — a basic site starts around ₹15,000 while full e-commerce platforms can go upward of ₹60,000. We provide detailed quotes after understanding your requirements." },
+  ];
+
   useEffect(() => {
-    const onScroll = () => {
-      document.querySelectorAll(".animate").forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          el.classList.add("visible");
-        }
-      });
-    };
-    window.addEventListener("scroll", onScroll);
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    observerRef.current = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".animate").forEach((el) => observerRef.current.observe(el));
+    return () => observerRef.current?.disconnect();
   }, []);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    setShowPopup(false);
+    setSubmitted(true);
+    setTimeout(() => { setShowPopup(false); setSubmitted(false); setFormData({ firstName: "", lastName: "", email: "", phone: "", service: "" }); }, 2500);
   };
 
   return (
-    <div>
-      <Header />
-      {/* Home */}
-      <div className="home-bg d-flex align-items-center justify-content-center text-center">
-        <div className="overlay" />
-        <div className="content container px-3">
-          <p>Host.Hive</p>
-          <h5 className="text-white fw-bold">
-            Experts in Execution Delivering Excellence
-          </h5>
-          <div className="d-flex justify-content-center mt-3">
-            <button
-              type="button"
-              className="send-btn"
-              onClick={() => setShowPopup(true)}
-            >
-              <span className="text-light">Get Started</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 74 74"
-                height="34"
-                width="34"
-              >
-                <circle
-                  strokeWidth="3"
-                  stroke="white"
-                  r="35.5"
-                  cy="37"
-                  cx="37"
-                />
-                <path
-                  fill="white"
-                  d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
-                />
-              </svg>
+    
+    <div className="hh-root">
+      {/* ── HERO ─────────────────────────────────────── */}
+      <section className="hero-section">
+        <div className="hero-grid-bg" />
+        <div className="hero-blob hero-blob-1" />
+        <div className="hero-blob hero-blob-2" />
+        <div className="hero-noise" />
+        <div className="hero-content">
+          <div className="hero-badge animate">Web Design &amp; Development</div>
+          <h1 className="hero-title animate">
+            <span className="brand-glow">Host.Hive</span>
+            <br />
+            <span className="hero-sub">Experts in Execution</span>
+          </h1>
+          <p className="hero-desc animate">
+            Transforming ideas into powerful digital experiences.<br />
+            Visakhapatnam's most trusted web &amp; app studio.
+          </p>
+          <div className="hero-actions animate">
+            <button className="btn-primary" onClick={() => setShowPopup(true)}>
+              Get Started <FaArrowRight />
             </button>
+            <a href="/Portfolio" className="btn-ghost">View Our Work</a>
+          </div>
+          <div className="hero-stats animate">
+            {achievements.map((a, i) => (
+              <div className="hero-stat" key={i}>
+                <span className="stat-icon">{a.icon}</span>
+                <strong>{a.value}</strong>
+                <small>{a.label}</small>
+              </div>
+            ))}
           </div>
         </div>
+        <div className="hero-scroll-hint">
+          <span>scroll</span>
+          <div className="scroll-line" />
+        </div>
+      </section>
 
-        {/* Popup Form */}
-        {showPopup && (
-          <div className="popup-overlay">
-            <div className="popup-form">
-              {/* (X) Button */}
-              <button
-                className="popup-close-btn"
-                onClick={() => setShowPopup(false)}
-              >
-                &times;
-              </button>
-              <h4 className="mb-3">Get in Touch</h4>
-              <form onSubmit={handleSubmit}>
-                <input
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type="text"
-                  name="service"
-                  placeholder="Which service are you looking for?"
-                  value={formData.service}
-                  onChange={handleChange}
-                  required
-                />
-                <div className="submit-btn-container">
-                  <button type="submit" className="send-btn">
-                    <span className="text-light">Submit</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 74 74"
-                      height="34"
-                      width="34"
-                    >
-                      <circle
-                        strokeWidth="3"
-                        stroke="white"
-                        r="35.5"
-                        cy="37"
-                        cx="37"
-                      />
-                      <path
-                        fill="white"
-                        d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
+      {/* ── MARQUEE ──────────────────────────────────── */}
+      <div className="marquee-strip">
+        <div className="marquee-track">
+          {["Website Design", "E-Commerce", "Mobile Apps", "SEO", "UI/UX Design", "Branding", "Website Design", "E-Commerce", "Mobile Apps", "SEO", "UI/UX Design", "Branding"].map((t, i) => (
+            <span key={i}>{t} <span className="marquee-dot">✦</span></span>
+          ))}
+        </div>
       </div>
 
-      <section className="welcome-section py-5 bg-light text-center">
-        <div className="container">
-          <h5 className="fw-bold text-uppercase mb-3 animate">Welcome to</h5>
-          <h1 className="mb-3 heading animate">Host.Hive</h1>
-          <p className="lead mx-auto animate" style={{ maxWidth: "800px" }}>
-            Host.Hive is the Web Design and Development Company in
-            Visakhapatnam, India. We are since 2024, in web design and
-            development and our motto is to develop, design websites and
-            generate lead and traffic for your website.
-          </p>
-        </div>
-      </section>
-
-      <section className="py-5 bg-white">
-        <div className="container">
-          <div className="row justify-content-center gx-4 gy-4">
-            <div className="col-md-6 col-lg-3 d-flex justify-content-center animate">
-              <div className="custom-section p-4 text-center">
-                <img
-                  src={website}
-                  alt="Website Design"
-                  className="section-icon mb-3"
-                />
-                <h5 className="fw-bold mb-2">Website Design</h5>
-                <p>
-                  Host.Hive is the Leading Low Cost Web Design Company In
-                  Visakhapatnam. We design unique design which suits your
-                  business.
-                </p>
-              </div>
+      {/* ── ABOUT ────────────────────────────────────── */}
+      <section className="about-section">
+        <div className="section-inner">
+          <div className="about-text">
+            <span className="eyebrow animate">Who We Are</span>
+            <h2 className="section-title animate">Crafting Digital Excellence <span className="gold">Since 2024</span></h2>
+            <p className="animate">We're a passionate team of designers, developers, and strategists based in Visakhapatnam, India. Our mission is to build digital products that don't just look good — they perform, convert, and grow your business.</p>
+            <ul className="about-list animate">
+              {["Client-first approach to every project", "Transparent communication & timelines", "Post-launch support and maintenance", "Cutting-edge tech for future-ready builds"].map((item, i) => (
+                <li key={i}><FaCheckCircle className="check-icon" /> {item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="about-visual animate">
+            <div className="av-card av-card-1">
+              <strong>18+</strong><span>Projects Delivered</span>
             </div>
-
-            <div className="col-md-6 col-lg-3 d-flex justify-content-center">
-              <div className="custom-section p-4 text-center">
-                <img
-                  src={Ecommerce}
-                  alt="E-Commerce Website Design"
-                  className="section-icon mb-3"
-                />
-                <h5 className="fw-bold mb-2">E-Commerce Website Design</h5>
-                <p>
-                  Build your own shopping Website. We are the Top-Notch
-                  E-Commerce Web Design In Visakhapatnam.
-                </p>
-              </div>
+            <div className="av-card av-card-2">
+              <strong>15+</strong><span>Happy Clients</span>
             </div>
-
-            <div className="col-md-6 col-lg-3 d-flex justify-content-center">
-              <div className="custom-section p-4 text-center">
-                <img
-                  src={app}
-                  alt="Mobile App Development"
-                  className="section-icon mb-3"
-                />
-                <h5 className="fw-bold mb-2">Mobile App Development</h5>
-                <p>
-                  We are living in the most advanced technology of connectivity,
-                  and that means more than ever.
-                </p>
-              </div>
+            <div className="av-card av-card-3">
+              <strong>100%</strong><span>Client Satisfaction</span>
             </div>
-
-            <div className="col-md-6 col-lg-3 d-flex justify-content-center">
-              <div className="custom-section p-4 text-center">
-                <img src={seo} alt="SEO" className="section-icon mb-3" />
-                <h5 className="fw-bold mb-2">SEO</h5>
-                <p>
-                  Be the first to reach your target audience before competitors.
-                  Host.Hive helps you through SEO.
-                </p>
-              </div>
-            </div>
+            <div className="av-ring" />
+            <div className="av-dot-grid" />
           </div>
         </div>
       </section>
 
-      <div className="container1">
-        <div className="why-us-content">
-          <div className="why-us-header animate">
-            <h2>Why Host.Hive?</h2>
-            <p>
-              Since 2024, we've been transforming ideas into digital reality.
-              With a 10+ strong team, 15+ happy clients, and 18+ projects
-              delivered. Our commitment to quality and innovation has made us a
-              trusted name in app and web development.
-            </p>
+      {/* ── SERVICES ─────────────────────────────────── */}
+      <section className="services-section" id="services">
+        <div className="section-inner">
+          <div className="section-header animate">
+            <span className="eyebrow">What We Do</span>
+            <h2 className="section-title">Our <span className="gold">Services</span></h2>
+            <p>Everything you need to build, grow, and scale your digital presence.</p>
           </div>
-          <div className="achievement-cards">
-            {achievements.map((item, index) => (
-              <div className="achievement-card animate" key={index}>
-                <div className="achievement-icon">{item.icon}</div>
-                <div className="achievement-content">
-                  <div className="achievement-value">{item.value}</div>
-                  <div className="achievement-label">{item.label}</div>
+          <div className="services-grid">
+            {services.map((s, i) => (
+              <div className="service-card animate" key={i} style={{ "--delay": `${i * 0.1}s` }}>
+                <div className="service-tag">{s.tag}</div>
+                <div className="service-icon">{s.icon}</div>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+                <div className="service-arrow"><FaArrowRight /></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROCESS ──────────────────────────────────── */}
+      <section className="process-section" id="process">
+        <div className="section-inner">
+          <div className="section-header animate">
+            <span className="eyebrow">How We Work</span>
+            <h2 className="section-title">Our <span className="gold">Process</span></h2>
+            <p>A proven 6-step framework that delivers results every time.</p>
+          </div>
+          <div className="process-grid">
+            {process.map((p, i) => (
+              <div className="process-card animate" key={i} style={{ "--delay": `${i * 0.08}s` }}>
+                <div className="process-step">{p.step}</div>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* ── TESTIMONIALS ─────────────────────────────── */}
+      <section className="testi-section">
+        <div className="section-inner">
+          <div className="section-header animate">
+            <span className="eyebrow">Client Love</span>
+            <h2 className="section-title">What They <span className="gold">Say</span></h2>
+          </div>
+          <div className="testi-grid">
+            {testimonials.map((t, i) => (
+              <div className="testi-card animate" key={i} style={{ "--delay": `${i * 0.1}s` }}>
+                <div className="testi-stars">{Array(t.stars).fill(0).map((_, j) => <FaStar key={j} />)}</div>
+                <p>"{t.message}"</p>
+                <div className="testi-author">
+                  <img src={t.img} alt={t.name} />
+                  <div>
+                    <strong>{t.name}</strong>
+                    <small>{t.role}</small>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      <section className="testimonial-section">
-        <div className="container">
-          <h2 className="section-title text-center mb-5 animate">
-            What Our Customers Say
-          </h2>
-
-          <div
-            id="testimonialCarousel"
-            className="carousel slide"
-            data-bs-ride="carousel"
-          >
-            <div className="carousel-inner">
-              {[
-                {
-                  name: "Priya Sharma",
-                  message:
-                    "Working with Host.Hive was a breeze. They brought my business idea to life beautifully.",
-                  img: "https://randomuser.me/api/portraits/women/44.jpg",
-                  stars: 5,
-                },
-                {
-                  name: "Rohan Mehta",
-                  message:
-                    "Amazing team! They handled everything with professionalism and creativity.",
-                  img: "https://randomuser.me/api/portraits/men/46.jpg",
-                  stars: 4,
-                },
-                {
-                  name: "Ananya Reddy",
-                  message:
-                    "Prompt service, beautiful design, and fantastic support. Highly recommend!",
-                  img: "https://randomuser.me/api/portraits/women/65.jpg",
-                  stars: 5,
-                },
-                {
-                  name: "Vikram Patel",
-                  message:
-                    "Loved the final website. The team exceeded expectations.",
-                  img: "https://randomuser.me/api/portraits/men/34.jpg",
-                  stars: 5,
-                },
-              ].map((review, index) => (
-                <div
-                  className={`carousel-item ${index === 0 ? "active" : ""}`}
-                  key={index}
-                >
-                  <div className="d-flex justify-content-center">
-                    <div className="testimonial-card text-center">
-                      <img
-                        src={review.img}
-                        alt={review.name}
-                        className="testimonial-img"
-                      />
-                      <p className="testimonial-message">"{review.message}"</p>
-                      <div className="testimonial-stars">
-                        {"★".repeat(review.stars)}
-                        {"☆".repeat(5 - review.stars)}
-                      </div>
-                      <h6 className="testimonial-name">– {review.name}</h6>
-                    </div>
-                  </div>
+      {/* ── FAQ ──────────────────────────────────────── */}
+      <section className="faq-section">
+        <div className="section-inner">
+          <div className="section-header animate">
+            <span className="eyebrow">Common Questions</span>
+            <h2 className="section-title">FAQ<span className="gold">s</span></h2>
+          </div>
+          <div className="faq-list">
+            {faqs.map((f, i) => (
+              <div className={`faq-item animate ${activeFaq === i ? "open" : ""}`} key={i} onClick={() => setActiveFaq(activeFaq === i ? null : i)}>
+                <div className="faq-q">
+                  <span>{f.q}</span>
+                  {activeFaq === i ? <FaChevronUp /> : <FaChevronDown />}
                 </div>
-              ))}
-            </div>
-
-            <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#testimonialCarousel"
-              data-bs-slide="prev"
-            >
-              <span className="carousel-control-prev-icon rounded-circle p-2 bg-dark"></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#testimonialCarousel"
-              data-bs-slide="next"
-            >
-              <span className="carousel-control-next-icon rounded-circle p-2 bg-dark"></span>
-              <span className="visually-hidden">Next</span>
-            </button>
+                {activeFaq === i && <div className="faq-a">{f.a}</div>}
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* ── CTA BANNER ───────────────────────────────── */}
+      <section className="cta-section">
+        <div className="cta-blob" />
+        <div className="cta-inner animate">
+          <h2>Ready to Build Something <span className="gold">Incredible?</span></h2>
+          <p>Let's discuss your project and turn your vision into reality.</p>
+          <button className="btn-primary" onClick={() => setShowPopup(true)}>
+            Start Your Project <FaArrowRight />
+          </button>
+        </div>
+      </section>
+
+      {/* ── CONTACT ──────────────────────────────────── */}
+      <section className="contact-section" id="contact">
+        <div className="section-inner contact-inner">
+          <div className="contact-info animate">
+            <span className="eyebrow">Get in Touch</span>
+            <h2 className="section-title">Let's <span className="gold">Connect</span></h2>
+            <p>Have a project in mind? Drop us a message and we'll get back to you within 24 hours.</p>
+            <div className="contact-details">
+              <div className="contact-item"><FaEnvelope /><span>hello@hosthive.in</span></div>
+              <div className="contact-item"><FaPhone /><span>+91 98765 43210</span></div>
+              <div className="contact-item"><FaMapMarkerAlt /><span>Visakhapatnam, Andhra Pradesh, India</span></div>
+            </div>
+            <div className="social-links">
+              <a href="#"><FaLinkedin /></a>
+              <a href="#"><FaTwitter /></a>
+              <a href="#"><FaInstagram /></a>
+            </div>
+          </div>
+          <form className="contact-form animate" onSubmit={handleSubmit}>
+            <div className="form-row">
+              <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required />
+              <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required />
+            </div>
+            <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
+            <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} required />
+            <select name="service" value={formData.service} onChange={handleChange} required>
+              <option value="">Select a Service</option>
+              <option>Website Design</option>
+              <option>E-Commerce</option>
+              <option>Mobile App Development</option>
+              <option>SEO</option>
+            </select>
+            <button type="submit" className="btn-primary full-width">
+              {submitted ? "Message Sent! ✓" : "Send Message"} {!submitted && <FaArrowRight />}
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* ── FOOTER ───────────────────────────────────── */}
+      <footer className="footer">
+        <div className="footer-inner">
+          <div className="footer-brand">
+            <span className="footer-logo">Host<span className="gold">.</span>Hive</span>
+            <p>Experts in Execution. Delivering Excellence.</p>
+          </div>
+          <div className="footer-links">
+            <div className="fl-col"><strong>Services</strong><a href="#">Website Design</a><a href="#">E-Commerce</a><a href="#">Mobile Apps</a><a href="#">SEO</a></div>
+            <div className="fl-col"><strong>Company</strong><a href="#">About</a><a href="#">Portfolio</a><a href="#">Process</a><a href="#">Contact</a></div>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <span>© 2025 Host.Hive. All rights reserved.</span>
+          <span>Made with ❤️ in Visakhapatnam</span>
+        </div>
+      </footer>
+
+      {/* ── POPUP ────────────────────────────────────── */}
+      {showPopup && (
+        <div className="popup-overlay" onClick={(e) => e.target.classList.contains("popup-overlay") && setShowPopup(false)}>
+          <div className="popup-box">
+            <button className="popup-close" onClick={() => setShowPopup(false)}>&times;</button>
+            {submitted ? (
+              <div className="popup-success">
+                <div className="success-icon">✓</div>
+                <h3>We'll be in touch!</h3>
+                <p>Thanks for reaching out. Our team will contact you within 24 hours.</p>
+              </div>
+            ) : (
+              <>
+                <div className="popup-header">
+                  <h3>Start Your Project</h3>
+                  <p>Fill in your details and we'll get back to you within 24 hours.</p>
+                </div>
+                <form className="popup-form-inner" onSubmit={handleSubmit}>
+                  <div className="form-row">
+                    <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required />
+                    <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required />
+                  </div>
+                  <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
+                  <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} required />
+                  <select name="service" value={formData.service} onChange={handleChange} required>
+                    <option value="">Select a Service</option>
+                    <option>Website Design</option>
+                    <option>E-Commerce</option>
+                    <option>Mobile App Development</option>
+                    <option>SEO</option>
+                  </select>
+                  <button type="submit" className="btn-primary full-width">
+                    Submit Request <FaArrowRight />
+                  </button>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

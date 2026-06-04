@@ -6,11 +6,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Portfolio from "./Components/Portfolio/Portfolio";
 import Contact from "./Components/Contact/Contact";
+import Header from "./Components/Header/Header";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <Header />
 
         <Routes>
           <Route path="/" element={<Home />} />

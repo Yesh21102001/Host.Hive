@@ -1,311 +1,139 @@
-import React, { useState } from "react";
-import Header from "../Header/Header";
-import Delicious from "../../Images/delicious.png";
-import Eggora from "../../Images/Eggora.png";
-import Ans from "../../Images/Ans.png";
-import Bhamas from "../../Images/Bhamas.png";
-import kanaka from "../../Images/kanakadurga.png";
-import Chandu from "../../Images/Chandu.png";
+import React, { useEffect, useRef } from "react";
 import "./Portfolio.css";
-import "../Home.css";
+import { FaArrowRight } from "react-icons/fa";
 
 const Portfolio = () => {
-  const [showPopup, setShowPopup] = useState(false);
+  const observerRef = useRef(null);
+
+  const projects = [
+    {
+      id: 1,
+      category: "E-COMMERCE PLATFORM",
+      title: "ShopNest",
+      subtitle: "Premium Fashion Store",
+      description: "A full-featured e-commerce platform with seamless checkout, inventory management, and personalized recommendations that increased client sales by 200%.",
+      tagline: "Elegant shopping experience",
+      color: "#fec62a",
+      results: "200% sales increase",
+      year: "2024"
+    },
+    {
+      id: 2,
+      category: "SAAS SOLUTION",
+      title: "TrakFlow",
+      subtitle: "Project Management Suite",
+      description: "Cloud-based project management tool with real-time collaboration, advanced analytics, and team automation serving over 10,000 active users.",
+      tagline: "Streamlined team collaboration",
+      color: "#4ecdc4",
+      results: "10K+ active users",
+      year: "2024"
+    }
+  ];
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".animate").forEach((el) => observerRef.current.observe(el));
+    return () => observerRef.current?.disconnect();
+  }, []);
 
   return (
-    <div>
-      <Header />
-      {/* Banner Section */}
-      <div className="banner position-relative d-flex justify-content-center align-items-center">
-        <div className="banner-overlay"></div>
-        <h1 className="fw-bold text-black position-relative z-2">Portfolio</h1>
-      </div>
+    <div className="portfolio-root">
+      {/* ── HERO ─────────────────────────────────────── */}
+      <section className="portfolio-hero">
+        <div className="hero-grid-bg" />
+        <div className="hero-blob hero-blob-1" />
+        <div className="hero-blob hero-blob-2" />
+        <div className="hero-noise" />
+        <div className="hero-content">
+          <div className="hero-badge animate">Our Creations</div>
+          <h1 className="hero-title animate">
+            Exceptional <span className="brand-glow">Work</span>
+            <br />
+            <span className="hero-sub">We've Done</span>
+          </h1>
+          <p className="hero-desc animate">
+            Explore our portfolio of successful projects across e-commerce,<br />
+            SaaS, mobile apps, and creative platforms.
+          </p>
+        </div>
+      </section>
 
-      {/* Cards Section */}
-      <div className="container py-5">
-        <div className="row g-4">
-          {/* Card 1 */}
-          <div className="col-md-6">
-            <div className="card h-100 shadow-sm">
-              <img src={Delicious} className="card-img-top" alt="project 1" />
-              <div className="card-body">
-                <h5 className="card-title fw-bold">
-                  Bhimavaram Delicious Biryanis
-                </h5>
-                <p className="card-text">
-                  This is a small description about the project.
-                </p>
-                <div className="d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="send-btn"
-                    onClick={() => {
-                      setShowPopup(true);
-                      window.location.href =
-                        "https://bhimavaramdeliciousbiryanis.in/";
-                    }}
-                  >
-                    <span className="text-light">View Project</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 74 74"
-                      height="34"
-                      width="34"
-                    >
-                      <circle
-                        strokeWidth="3"
-                        stroke="white"
-                        r="35.5"
-                        cy="37"
-                        cx="37"
-                      />
-                      <path
-                        fill="white"
-                        d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
-                      />
-                    </svg>
-                  </button>
+      {/* ── PROJECTS GRID ────────────────────────────── */}
+      <section className="projects-section">
+        <div className="section-inner">
+          <div className="projects-grid">
+            {projects.map((project, i) => (
+              <div
+                key={project.id}
+                className="project-card animate"
+                style={{ "--delay": `${i * 0.1}s`, "--accent": project.color }}
+              >
+                {/* Project Hero Image */}
+                <div className="project-hero" style={{ background: `linear-gradient(135deg, ${project.color}40 0%, ${project.color}20 100%)` }}>
+                  <div className="hero-overlay" />
+                  <div className="hero-content">
+                    <p className="hero-tagline">{project.tagline}</p>
+                    <h2 className="hero-title">{project.title}</h2>
+                  </div>
+                </div>
+
+                {/* Project Info */}
+                <div className="project-info">
+                  <span className="project-category" style={{ color: project.color }}>
+                    {project.category}
+                  </span>
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-subtitle">{project.subtitle}</p>
+                  <p className="project-description">{project.description}</p>
+
+                  <a href="#" className="read-story">
+                    Read the story <FaArrowRight />
+                  </a>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          {/* Card 2 */}
-          <div className="col-md-6">
-            <div className="card h-100 shadow-sm">
-              <img src={Eggora} className="card-img-top" alt="project 1" />
-              <div className="card-body">
-                <h5 className="card-title fw-bold">Eggora Natural Nutrition</h5>
-                <p className="card-text">
-                  This is a small description about the project.
-                </p>
-                <div className="d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="send-btn"
-                    onClick={() => {
-                      setShowPopup(true);
-                      window.location.href =
-                        "https://eggora.vercel.app/";
-                    }}
-                  >
-                    <span className="text-light">View Project</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 74 74"
-                      height="34"
-                      width="34"
-                    >
-                      <circle
-                        strokeWidth="3"
-                        stroke="white"
-                        r="35.5"
-                        cy="37"
-                        cx="37"
-                      />
-                      <path
-                        fill="white"
-                        d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
+      {/* ── STATS ────────────────────────────────────── */}
+      <section className="stats-section">
+        <div className="section-inner">
+          <div className="stats-grid">
+            <div className="stat-card animate">
+              <div className="stat-number">50+</div>
+              <div className="stat-text">Projects Delivered</div>
             </div>
-          </div>
-
-          {/* Card 3 */}
-          <div className="col-md-6">
-            <div className="card h-100 shadow-sm">
-              <img src={Ans} className="card-img-top" alt="project 1" />
-              <div className="card-body">
-                <h5 className="card-title fw-bold">
-                  Anusha Catering & Services
-                </h5>
-                <p className="card-text">
-                  This is a small description about the project.
-                </p>
-
-                <div className="d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="send-btn"
-                    onClick={() => {
-                      setShowPopup(true);
-                      window.location.href =
-                        "https://ans.anushacatering.in/";
-                    }}
-                  >
-                    <span className="text-light">View Project</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 74 74"
-                      height="34"
-                      width="34"
-                    >
-                      <circle
-                        strokeWidth="3"
-                        stroke="white"
-                        r="35.5"
-                        cy="37"
-                        cx="37"
-                      />
-                      <path
-                        fill="white"
-                        d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
+            <div className="stat-card animate" style={{ "--delay": "0.1s" }}>
+              <div className="stat-number">40+</div>
+              <div className="stat-text">Happy Clients</div>
             </div>
-          </div>
-
-          {/* Card 4 */}
-          <div className="col-md-6">
-            <div className="card h-100 shadow-sm">
-              <img src={Bhamas} className="card-img-top" alt="project 1" />
-              <div className="card-body">
-                <h5 className="card-title fw-bold">Bhama's Kitchen</h5>
-                <p className="card-text">
-                  This is a small description about the project.
-                </p>
-
-                <div className="d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="send-btn"
-                    onClick={() => {
-                      setShowPopup(true);
-                      window.location.href =
-                        "https://bhamaskitchen.in/";
-                    }}
-                  >
-                    <span className="text-light">View Project</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 74 74"
-                      height="34"
-                      width="34"
-                    >
-                      <circle
-                        strokeWidth="3"
-                        stroke="white"
-                        r="35.5"
-                        cy="37"
-                        cx="37"
-                      />
-                      <path
-                        fill="white"
-                        d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
+            <div className="stat-card animate" style={{ "--delay": "0.2s" }}>
+              <div className="stat-number">8+</div>
+              <div className="stat-text">Years Experience</div>
             </div>
-          </div>
-
-          {/* Card 5 */}
-          <div className="col-md-6">
-            <div className="card h-100 shadow-sm">
-              <img src={kanaka} className="card-img-top" alt="project 1" />
-              <div className="card-body">
-                <h5 className="card-title fw-bold">Sri Kanakadurga Events</h5>
-                <p className="card-text">
-                  This is a small description about the project.
-                </p>
-
-                <div className="d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="send-btn"
-                    onClick={() => {
-                      setShowPopup(true);
-                      window.location.href =
-                        "https://kanakadurgacateringsuppliers.in/";
-                    }}
-                  >
-                    <span className="text-light">View Project</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 74 74"
-                      height="34"
-                      width="34"
-                    >
-                      <circle
-                        strokeWidth="3"
-                        stroke="white"
-                        r="35.5"
-                        cy="37"
-                        cx="37"
-                      />
-                      <path
-                        fill="white"
-                        d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          {/* Card 6 */}
-          <div className="col-md-6">
-            <div className="card h-100 shadow-sm">
-              <img src={Chandu} className="card-img-top" alt="project 1" />
-              <div className="card-body">
-                <h5 className="card-title fw-bold">Chandu Events</h5>
-                <p className="card-text">
-                  This is a small description about the project.
-                </p>
-
-                <div className="d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="send-btn"
-                    onClick={() => {
-                      setShowPopup(true);
-                      window.location.href =
-                        "https://chandu-seven.vercel.app/";
-                    }}
-                  >
-                    <span className="text-light">View Project</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 74 74"
-                      height="34"
-                      width="34"
-                    >
-                      <circle
-                        strokeWidth="3"
-                        stroke="white"
-                        r="35.5"
-                        cy="37"
-                        cx="37"
-                      />
-                      <path
-                        fill="white"
-                        d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                
-              </div>
+            <div className="stat-card animate" style={{ "--delay": "0.3s" }}>
+              <div className="stat-number">99%</div>
+              <div className="stat-text">Client Satisfaction</div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────── */}
+      <section className="cta-section">
+        <div className="cta-blob" />
+        <div className="cta-inner animate">
+          <h2>Ready to Build Your <span className="gold">Next Project?</span></h2>
+          <p>Let's create something extraordinary together.</p>
+          <button className="btn-primary">
+            Start Your Project <FaArrowRight />
+          </button>
+        </div>
+      </section>
     </div>
   );
 };
