@@ -81,6 +81,13 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const message = `Hello, I'm ${formData.firstName} ${formData.lastName}. I'm interested in ${formData.service}. You can reach me at ${formData.email} or ${formData.phone}.`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/6301253364?text=${encodedMessage}`;
+
+    window.open(whatsappUrl, "_blank");
+
     setSubmitted(true);
     setTimeout(() => { setShowPopup(false); setSubmitted(false); setFormData({ firstName: "", lastName: "", email: "", phone: "", service: "" }); }, 2500);
   };
@@ -306,7 +313,7 @@ const Home = () => {
       </section>
 
       {/* ── FOOTER ───────────────────────────────────── */}
-      <footer className="footer">
+      {/* <footer className="footer">
         <div className="footer-inner">
           <div className="footer-brand">
             <span className="footer-logo">Host<span className="gold">.</span>Hive</span>
@@ -321,7 +328,9 @@ const Home = () => {
           <span>© 2025 Host.Hive. All rights reserved.</span>
           <span>Made with ❤️ in Visakhapatnam</span>
         </div>
-      </footer>
+
+        
+      </footer> */}
 
       {/* ── POPUP ────────────────────────────────────── */}
       {showPopup && (

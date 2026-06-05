@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import "./Portfolio.css";
 import { FaArrowRight } from "react-icons/fa";
+import rrbrosImg from "../../Images/rrbros.png";
+import huayinImg from "../../Images/Huain_trade.png";
 
 const Portfolio = () => {
   const observerRef = useRef(null);
@@ -8,25 +10,29 @@ const Portfolio = () => {
   const projects = [
     {
       id: 1,
-      category: "E-COMMERCE PLATFORM",
-      title: "ShopNest",
-      subtitle: "Premium Fashion Store",
-      description: "A full-featured e-commerce platform with seamless checkout, inventory management, and personalized recommendations that increased client sales by 200%.",
-      tagline: "Elegant shopping experience",
+      category: "RETAIL E-COMMERCE",
+      title: "RR Bros",
+      subtitle: "Multi-Category Shopping Mall",
+      description: "A comprehensive online presence for a Visakhapatnam-based multi-category retail store specializing in wedding garments, festive wear, and family fashion. Features curated collections, inventory management, and seamless shopping experience.",
+      tagline: "Complete family shopping destination",
       color: "#fec62a",
-      results: "200% sales increase",
-      year: "2024"
+      results: "Enhanced online presence",
+      year: "2024",
+      link: "https://rrbros.in/",
+      image: rrbrosImg
     },
     {
       id: 2,
-      category: "SAAS SOLUTION",
-      title: "TrakFlow",
-      subtitle: "Project Management Suite",
-      description: "Cloud-based project management tool with real-time collaboration, advanced analytics, and team automation serving over 10,000 active users.",
-      tagline: "Streamlined team collaboration",
+      category: "INTERNATIONAL TRADE",
+      title: "Huayin Trade",
+      subtitle: "China-India Trade Platform",
+      description: "A sophisticated B2B trading platform connecting Indian and Chinese suppliers for bulk commodities, minerals, and industrial equipment. Streamlines cross-border supply chain with real-time inventory, logistics tracking, and trade documentation.",
+      tagline: "Global trade made seamless",
       color: "#4ecdc4",
-      results: "10K+ active users",
-      year: "2024"
+      results: "30+ countries served",
+      year: "2024",
+      link: "https://www.huaintrade.com/",
+      image: huayinImg
     }
   ];
 
@@ -72,12 +78,7 @@ const Portfolio = () => {
                 style={{ "--delay": `${i * 0.1}s`, "--accent": project.color }}
               >
                 {/* Project Hero Image */}
-                <div className="project-hero" style={{ background: `linear-gradient(135deg, ${project.color}40 0%, ${project.color}20 100%)` }}>
-                  <div className="hero-overlay" />
-                  <div className="hero-content">
-                    <p className="hero-tagline">{project.tagline}</p>
-                    <h2 className="hero-title">{project.title}</h2>
-                  </div>
+                <div className="project-hero" style={{ backgroundImage: project.image ? `url(${project.image})` : `linear-gradient(135deg, ${project.color}40 0%, ${project.color}20 100%)` }}>
                 </div>
 
                 {/* Project Info */}
@@ -89,9 +90,15 @@ const Portfolio = () => {
                   <p className="project-subtitle">{project.subtitle}</p>
                   <p className="project-description">{project.description}</p>
 
-                  <button type="button" className="read-story">
-                    Read the story <FaArrowRight />
-                  </button>
+                  {project.link ? (
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="read-story">
+                      Visit Website <FaArrowRight />
+                    </a>
+                  ) : (
+                    <button type="button" className="read-story">
+                      Read the story <FaArrowRight />
+                    </button>
+                  )}
                 </div>
               </div>
             ))}

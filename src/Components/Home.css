@@ -740,20 +740,102 @@
 /* ════════════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════════════ */
-@media (max-width: 900px) {
-  .about-section .section-inner { grid-template-columns: 1fr; gap: 48px; }
-  .about-visual { height: 250px; }
+@media (max-width: 1024px) {
+  .section-inner { padding: 0 20px; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .testi-grid { grid-template-columns: repeat(2, 1fr); }
   .contact-inner { grid-template-columns: 1fr; gap: 48px; }
 }
 
-@media (max-width: 640px) {
-  .hero-stats { gap: 20px; }
-  .hero-stat strong { font-size: 1.5rem; }
+@media (max-width: 768px) {
+  .hero-section { padding: 60px 20px 40px; }
+  .hero-title { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+  .hero-desc { font-size: 1rem; }
+  .section-title { font-size: clamp(1.5rem, 4vw, 2rem); }
+  .section-header { margin-bottom: 40px; }
+
+  .services-grid { grid-template-columns: 1fr; gap: 20px; }
+  .process-grid { grid-template-columns: 1fr; gap: 24px; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .about-section .section-inner { grid-template-columns: 1fr; gap: 40px; }
+  .about-visual { height: 200px; }
+
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 0 16px; }
+  .hero-stat { flex-direction: column; text-align: center; }
+  .hero-stat strong { font-size: 1.3rem; }
+
   .form-row { grid-template-columns: 1fr; }
-  .footer-inner { flex-direction: column; }
-  .footer-links { flex-direction: column; gap: 32px; }
-  .footer-bottom { flex-direction: column; text-align: center; }
-  .hero-actions { flex-direction: column; align-items: center; }
-  .process-grid { grid-template-columns: 1fr; }
-  .popup-box { padding: 28px 20px; }
+  .contact-form { padding: 32px 20px; }
+  .contact-inner { grid-template-columns: 1fr; }
+
+  .popup-box { padding: 28px 20px; max-width: 90vw; }
+  .popup-form-inner input,
+  .popup-form-inner select { padding: 11px 12px; font-size: 0.9rem; }
+
+  .cta-section { padding: 40px 20px; }
+  .cta-inner h2 { font-size: 1.8rem; }
+
+  .marquee-track span { font-size: 0.85rem; }
+}
+
+@media (max-width: 640px) {
+  .hero-section { padding: 50px 16px 30px; min-height: 50vh; }
+  .hero-title { font-size: clamp(1.5rem, 3.5vw, 2rem); line-height: 1.1; }
+  .hero-desc { font-size: 0.9rem; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .hero-stat { padding: 12px; }
+  .hero-stat strong { font-size: 1.1rem; }
+  .hero-stat small { font-size: 0.7rem; }
+
+  .section-title { font-size: clamp(1.3rem, 3vw, 1.8rem); }
+  .eyebrow { font-size: 0.65rem; padding: 4px 10px; }
+  .section-header { margin-bottom: 30px; }
+  .section-header p { font-size: 0.9rem; }
+
+  .services-grid { grid-template-columns: 1fr; gap: 16px; }
+  .service-card { padding: 20px 16px; }
+  .service-tag { font-size: 0.65rem; padding: 4px 8px; }
+  .service-icon { font-size: 32px; }
+
+  .process-grid { grid-template-columns: 1fr; gap: 16px; }
+  .process-card { padding: 16px 12px; }
+  .process-step { font-size: 1.2rem; }
+  .process-card h3 { font-size: 1rem; }
+  .process-card p { font-size: 0.85rem; }
+
+  .testi-card { padding: 16px; }
+  .testi-stars { gap: 4px; }
+  .testi-stars svg { font-size: 16px; }
+  .testi-author img { width: 36px; height: 36px; }
+
+  .faq-item { padding: 12px; margin-bottom: 8px; }
+  .faq-q { gap: 8px; }
+  .faq-q span { font-size: 0.9rem; }
+  .faq-a { padding: 12px 0; font-size: 0.85rem; }
+
+  .about-section .section-inner { gap: 24px; padding: 0 16px; }
+  .about-visual { height: 150px; }
+  .about-list { gap: 8px; }
+  .about-list li { font-size: 0.85rem; }
+
+  .contact-section { padding: 40px 16px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 32px; padding: 0 16px; }
+  .contact-form { padding: 24px 16px; }
+  .contact-form input,
+  .contact-form select { padding: 11px 12px; font-size: 0.9rem; }
+  .form-row { gap: 12px; }
+
+  .contact-item { gap: 8px; font-size: 0.85rem; }
+  .contact-item svg { font-size: 16px; }
+
+  .popup-overlay { padding: 20px; }
+  .popup-box { padding: 24px 16px; max-width: 95vw; border-radius: 12px; }
+  .popup-header h3 { font-size: 1.3rem; }
+  .popup-header p { font-size: 0.85rem; }
+
+  .hero-scroll-hint { display: none; }
+  .marquee-track { gap: 16px; }
 }
