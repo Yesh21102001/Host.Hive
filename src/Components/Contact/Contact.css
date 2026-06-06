@@ -10,8 +10,9 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 80px 24px;
+  padding: 120px 24px 80px 24px;
   background: var(--dark);
+  margin-top: 80px;
 }
 
 .contact-hero-content {

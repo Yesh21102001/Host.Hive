@@ -50,7 +50,7 @@
 /* Logo */
 .hdr__logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
 .hdr__logo img {
-  height: 42px;
+  height: 90px;
   width: auto;
   object-fit: contain;
   transition: opacity .2s;
@@ -136,7 +136,7 @@
   }
 
   .mhdr__logo {
-    height: 36px;
+    height: 70px;
     width: auto;
     object-fit: contain;
   }

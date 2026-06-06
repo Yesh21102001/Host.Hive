@@ -1,6 +1,9 @@
 ﻿import React, { useState, useEffect, useRef } from "react";
 import "./Gallery.css";
 import { FaArrowRight, FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import post1 from "../../Images/host_hive/post_1.png";
+import post2 from "../../Images/host_hive/post_2.png";
+import post3 from "../../Images/host_hive/post_3.png";
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -8,14 +11,9 @@ const Gallery = () => {
   const observerRef = useRef(null);
 
   const galleryImages = [
-    { id: 1, title: "Project 1", image: "https://via.placeholder.com/600x600?text=Project+1" },
-    { id: 2, title: "Project 2", image: "https://via.placeholder.com/600x600?text=Project+2" },
-    { id: 3, title: "Project 3", image: "https://via.placeholder.com/600x600?text=Project+3" },
-    { id: 4, title: "Project 4", image: "https://via.placeholder.com/600x600?text=Project+4" },
-    { id: 5, title: "Project 5", image: "https://via.placeholder.com/600x600?text=Project+5" },
-    { id: 6, title: "Project 6", image: "https://via.placeholder.com/600x600?text=Project+6" },
-    { id: 7, title: "Project 7", image: "https://via.placeholder.com/600x600?text=Project+7" },
-    { id: 8, title: "Project 8", image: "https://via.placeholder.com/600x600?text=Project+8" },
+    { id: 1, title: "Host.Hive Project 1", image: post1 },
+    { id: 2, title: "Host.Hive Project 2", image: post2 },
+    { id: 3, title: "Host.Hive Project 3", image: post3 },
   ];
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Logo from "../../Images/Host Hive.png";
+import Logo from "../../Images/logo_host.png";
 import "./Header.css";
 import { FaHome, FaBoxOpen, FaImages, FaPhoneAlt } from "react-icons/fa";
 
