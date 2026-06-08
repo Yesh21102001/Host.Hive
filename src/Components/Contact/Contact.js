@@ -73,14 +73,14 @@ const Contact = () => {
             <div className="contact-info-card animate">
               <div className="info-icon"><FaPhone /></div>
               <h3>Phone</h3>
-              <p className="info-value">+91 98765 43210</p>
+              <p className="info-value">+91 6301253364</p>
               <p className="info-desc">Available Mon-Fri, 10 AM - 6 PM IST</p>
             </div>
 
             <div className="contact-info-card animate" style={{ "--delay": "0.1s" }}>
               <div className="info-icon"><FaEnvelope /></div>
               <h3>Email</h3>
-              <p className="info-value">hello@hosthive.in</p>
+              <p className="info-value">hosthive01@gmail.com</p>
               <p className="info-desc">We'll respond within 24 hours</p>
             </div>
 
