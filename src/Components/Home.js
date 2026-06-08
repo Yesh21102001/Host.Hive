@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Helmet } from "react-helmet";
 import "./Home.css";
 import { FaAward, FaUsers, FaSmile, FaTasks, FaCode, FaShoppingCart, FaMobileAlt, FaSearch, FaCheckCircle, FaStar, FaArrowRight, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaInstagram, FaChevronDown, FaChevronUp } from "react-icons/fa";
 
@@ -93,8 +94,29 @@ const Home = () => {
   };
 
   return (
-    
     <div className="hh-root">
+      <Helmet>
+        <title>Host Hive | Website Development Company in Vizag</title>
+        <meta
+          name="description"
+          content="Host Hive is a professional web design and app development company in Visakhapatnam offering website development, ecommerce solutions and mobile app development."
+        />
+        <meta
+          name="keywords"
+          content="website development vizag, web design company vizag, ecommerce development vizag, react js developers vizag, app development company visakhapatnam"
+        />
+        <meta name="author" content="Host Hive" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Host Hive" />
+        <meta
+          property="og:description"
+          content="Professional website and app development company in Vizag."
+        />
+        <meta property="og:image" content="https://hosthive.online/logo.png" />
+        <meta property="og:url" content="https://hosthive.online" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+
       {/* ── HERO ─────────────────────────────────────── */}
       <section className="hero-section">
         <div className="hero-grid-bg" />
@@ -312,25 +334,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── FOOTER ───────────────────────────────────── */}
-      {/* <footer className="footer">
-        <div className="footer-inner">
-          <div className="footer-brand">
-            <span className="footer-logo">Host<span className="gold">.</span>Hive</span>
-            <p>Experts in Execution. Delivering Excellence.</p>
-          </div>
-          <div className="footer-links">
-            <div className="fl-col"><strong>Services</strong><button type="button" className="footer-btn">Website Design</button><button type="button" className="footer-btn">E-Commerce</button><button type="button" className="footer-btn">Mobile Apps</button><button type="button" className="footer-btn">SEO</button></div>
-            <div className="fl-col"><strong>Company</strong><button type="button" className="footer-btn">About</button><a href="/Portfolio">Portfolio</a><button type="button" className="footer-btn">Process</button><button type="button" className="footer-btn">Contact</button></div>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>© 2025 Host.Hive. All rights reserved.</span>
-          <span>Made with ❤️ in Visakhapatnam</span>
-        </div>
-
-        
-      </footer> */}
 
       {/* ── POPUP ────────────────────────────────────── */}
       {showPopup && (
