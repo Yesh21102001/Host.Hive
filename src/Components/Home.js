@@ -138,7 +138,6 @@ const Home = () => {
             <button className="btn-primary" onClick={() => setShowPopup(true)}>
               Get Started <FaArrowRight />
             </button>
-            <a href="/portfolio" className="btn-ghost">View Our Work</a>
           </div>
           <div className="hero-stats animate">
             {achievements.map((a, i) => (
