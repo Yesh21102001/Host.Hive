@@ -1,20 +1,20 @@
-﻿import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Gallery.css";
 import { FaArrowRight, FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import post1 from "../../Images/host_hive/post_1.png";
 import post2 from "../../Images/host_hive/post_2.png";
 import post3 from "../../Images/host_hive/post_3.png";
 
+const galleryImages = [
+  { id: 1, title: "Host.Hive Project 1", image: post1 },
+  { id: 2, title: "Host.Hive Project 2", image: post2 },
+  { id: 3, title: "Host.Hive Project 3", image: post3 },
+];
+
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const observerRef = useRef(null);
-
-  const galleryImages = [
-    { id: 1, title: "Host.Hive Project 1", image: post1 },
-    { id: 2, title: "Host.Hive Project 2", image: post2 },
-    { id: 3, title: "Host.Hive Project 3", image: post3 },
-  ];
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -51,8 +51,16 @@ const Gallery = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!selectedImage) return;
-      if (e.key === "ArrowRight") nextImage();
-      if (e.key === "ArrowLeft") prevImage();
+      if (e.key === "ArrowRight") {
+        const newIndex = (currentIndex + 1) % galleryImages.length;
+        setCurrentIndex(newIndex);
+        setSelectedImage(galleryImages[newIndex]);
+      }
+      if (e.key === "ArrowLeft") {
+        const newIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+        setCurrentIndex(newIndex);
+        setSelectedImage(galleryImages[newIndex]);
+      }
       if (e.key === "Escape") closeImage();
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -103,21 +111,17 @@ const Gallery = () => {
       {selectedImage && (
         <div className="lightbox-overlay" onClick={closeImage}>
           <div className="lightbox-container" onClick={(e) => e.stopPropagation()}>
-            {/* Close Button */}
             <button className="lightbox-close" onClick={closeImage}>
               <FaTimes />
             </button>
 
-            {/* Image */}
             <img src={selectedImage.image} alt={selectedImage.title} className="lightbox-image" />
 
-            {/* Title */}
             <div className="lightbox-info">
               <h3>{selectedImage.title}</h3>
               <p>{currentIndex + 1} / {galleryImages.length}</p>
             </div>
 
-            {/* Navigation */}
             <button className="lightbox-nav lightbox-prev" onClick={prevImage}>
               <FaChevronLeft />
             </button>
@@ -125,7 +129,6 @@ const Gallery = () => {
               <FaChevronRight />
             </button>
 
-            {/* Keyboard Hint */}
             <div className="lightbox-hint">
               Use arrow keys to navigate • ESC to close
             </div>

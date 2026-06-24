@@ -193,9 +193,9 @@ const Contact = () => {
             <div className="contact-side-card">
               <h3>Connect With Us</h3>
               <div className="social-links-contact">
-                <a href="#" className="social-btn-contact"><FaLinkedin /></a>
-                <a href="#" className="social-btn-contact"><FaTwitter /></a>
-                <a href="#" className="social-btn-contact"><FaInstagram /></a>
+                <button type="button" className="social-btn-contact"><FaLinkedin /></button>
+                <button type="button" className="social-btn-contact"><FaTwitter /></button>
+                <button type="button" className="social-btn-contact"><FaInstagram /></button>
               </div>
             </div>
           </div>
