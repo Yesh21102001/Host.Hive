@@ -13,7 +13,7 @@ const Home = () => {
   const achievements = [
     { icon: <FaAward />, value: "2+", label: "Years of Experience" },
     { icon: <FaUsers />, value: "10+", label: "Team Members" },
-    { icon: <FaSmile />, value: "15+", label: "Happy Clients" },
+    { icon: <FaSmile />, value: "16+", label: "Happy Clients" },
     { icon: <FaTasks />, value: "18+", label: "Projects Delivered" },
   ];
 
@@ -182,7 +182,7 @@ const Home = () => {
               <strong>18+</strong><span>Projects Delivered</span>
             </div>
             <div className="av-card av-card-2">
-              <strong>15+</strong><span>Happy Clients</span>
+              <strong>16+</strong><span>Happy Clients</span>
             </div>
             <div className="av-card av-card-3">
               <strong>100%</strong><span>Client Satisfaction</span>
