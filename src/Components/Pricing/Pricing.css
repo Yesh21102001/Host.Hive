@@ -1,0 +1,181 @@
+/* Shared section, card and FAQ layouts come from Home.css and index.css. */
+
+.pricing-first {
+  padding-top: 72px;
+}
+
+/* ── Plan cards ─────────────────────────────── */
+.plan {
+  position: relative;
+  padding: 36px 30px 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan--featured {
+  border: 2px solid var(--accent);
+  box-shadow: var(--shadow-lift);
+}
+
+.plan__badge {
+  position: absolute;
+  top: -13px;
+  left: 30px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.plan h3 {
+  font-size: 1.3rem;
+}
+
+.plan__audience {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 8px;
+  min-height: 3em;
+}
+
+.plan__price {
+  font-family: var(--font-display);
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.1;
+  margin: 22px 0 24px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.plan__price--custom {
+  font-size: 1.7rem;
+  white-space: nowrap;
+  padding-top: 8px;
+}
+
+.plan__price small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.plan__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  display: grid;
+  gap: 12px;
+  flex: 1;
+}
+
+.plan__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.plan__list svg {
+  color: var(--accent-2);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.plan__timeline {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 22px;
+}
+
+/* ── Timeline table ─────────────────────────── */
+.table-card {
+  overflow-x: auto;
+  padding: 0;
+}
+
+.price-table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  color: var(--text);
+}
+
+.price-table th,
+.price-table td {
+  padding: 20px 28px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.price-table thead th {
+  background: var(--dark-2);
+  color: var(--accent);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.price-table tbody th {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.price-table tbody tr:last-child th,
+.price-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Factors ────────────────────────────────── */
+.factor {
+  padding: 32px 28px;
+}
+
+.factor__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--accent-2-soft);
+  color: var(--accent-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 22px;
+}
+
+.factor h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.factor p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .price-table { min-width: 0; }
+  .price-table thead { display: none; }
+  .price-table, .price-table tbody, .price-table tr, .price-table th, .price-table td { display: block; width: 100%; }
+  .price-table tr { padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .price-table tbody tr:last-child { border-bottom: none; }
+  .price-table th, .price-table td { padding: 0; border: none; }
+  .price-table th { margin-bottom: 8px; font-size: 1.02rem; }
+  .price-table td { display: flex; justify-content: space-between; gap: 16px; padding: 4px 0; font-size: 0.94rem; }
+  .price-table td::before { content: attr(data-label); color: var(--muted); font-weight: 600; }
+  .plan__audience { min-height: 0; }
+  .plan__price--custom { white-space: normal; font-size: 1.5rem; }
+  .table-card { border-radius: var(--radius-sm); }
+  .price-table th, .price-table td { padding: 16px 18px; font-size: 0.92rem; }
+}

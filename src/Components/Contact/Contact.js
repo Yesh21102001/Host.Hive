@@ -1,207 +1,88 @@
-import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import "../Home.css";
 import "./Contact.css";
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaInstagram, FaArrowRight, FaClock } from "react-icons/fa";
+import QuoteForm from "../QuoteForm/QuoteForm";
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock, FaCheckCircle, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { PHONE_DISPLAY, PHONE_E164, EMAIL, ADDRESS_LINE, HOURS_LINE, SOCIAL_PROFILES } from "../../lib/site";
+
+const reasons = [
+  "Expert team with 2+ years of experience",
+  "100% client satisfaction rate",
+  "Quick turnaround times",
+  "Post-launch support included",
+  "Transparent communication",
+  "Competitive pricing",
+];
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    service: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const observerRef = useRef(null);
-
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".animate").forEach((el) => observerRef.current.observe(el));
-    return () => observerRef.current?.disconnect();
-  }, []);
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const message = `Hello, I'm ${formData.firstName} ${formData.lastName}. I'm interested in ${formData.service}. You can reach me at ${formData.email} or ${formData.phone}.`;
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/6301253364?text=${encodedMessage}`;
-
-    window.open(whatsappUrl, "_blank");
-
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        service: "",
-      });
-    }, 2500);
-  };
-
   return (
-    <div className="hh-root">
-      {/* ── HERO ─────────────────────────────────────── */}
-      <section className="contact-hero">
-        <div className="hero-grid-bg" />
-        <div className="hero-blob hero-blob-1" />
-        <div className="hero-blob hero-blob-2" />
-        <div className="hero-noise" />
-        <div className="contact-hero-content">
-          <span className="eyebrow animate">Contact Us</span>
-          <h1 className="contact-hero-title animate">Let's Build Something <span className="gold">Amazing</span></h1>
-          <p className="contact-hero-desc animate">
-            Got a project in mind? We'd love to hear about it. Get in touch and let's create something incredible together.
+    <main>
+      <section className="page-hero">
+        <div className="container">
+          <ol className="breadcrumb">
+            <li><Link href="/">Home</Link></li>
+            <li aria-hidden="true">/</li>
+            <li aria-current="page">Contact</li>
+          </ol>
+          <span className="eyebrow">Contact us</span>
+          <h1>Let&apos;s build something <span className="highlight">amazing</span></h1>
+          <p>
+            Got a project in mind? We would love to hear about it. Get in touch and let&apos;s create
+            something incredible together.
           </p>
         </div>
       </section>
 
-      {/* ── CONTACT INFO ────────────────────────────── */}
-      <section className="contact-info-section">
-        <div className="section-inner">
-          <div className="contact-info-grid">
-            <div className="contact-info-card animate">
-              <div className="info-icon"><FaPhone /></div>
-              <h3>Phone</h3>
-              <p className="info-value">+91 6301253364</p>
-              <p className="info-desc">Available Mon-Fri, 10 AM - 6 PM IST</p>
+      <section className="section">
+        <div className="container split split--contact">
+          <div className="split__copy">
+            <span className="eyebrow">Reach us directly</span>
+            <h2>Talk to <span className="highlight">our team</span></h2>
+            <p>Prefer a call or a chat? Use any of the channels below. We reply within 24 hours.</p>
+
+            <ul className="contact-list">
+              <li>
+                <span className="contact-list__icon"><FaPhoneAlt /></span>
+                <a href={`tel:${PHONE_DISPLAY.replace(/\s/g, "")}`}>{PHONE_DISPLAY}</a>
+              </li>
+              <li>
+                <span className="contact-list__icon"><FaEnvelope /></span>
+                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+              </li>
+              <li>
+                <span className="contact-list__icon"><FaMapMarkerAlt /></span>
+                <span>{ADDRESS_LINE}</span>
+              </li>
+              <li>
+                <span className="contact-list__icon"><FaClock /></span>
+                <span>{HOURS_LINE}</span>
+              </li>
+            </ul>
+
+            <div className="contact-social">
+              <a href={SOCIAL_PROFILES[0]} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+              <a href={`https://wa.me/${PHONE_E164.replace("+", "")}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><FaWhatsapp /></a>
+              <a href={SOCIAL_PROFILES[1]} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
             </div>
 
-            <div className="contact-info-card animate" style={{ "--delay": "0.1s" }}>
-              <div className="info-icon"><FaEnvelope /></div>
-              <h3>Email</h3>
-              <p className="info-value">hosthive01@gmail.com</p>
-              <p className="info-desc">We'll respond within 24 hours</p>
-            </div>
-
-            <div className="contact-info-card animate" style={{ "--delay": "0.2s" }}>
-              <div className="info-icon"><FaMapMarkerAlt /></div>
-              <h3>Address</h3>
-              <p className="info-value">Visakhapatnam</p>
-              <p className="info-desc">Andhra Pradesh, India</p>
-            </div>
-
-            <div className="contact-info-card animate" style={{ "--delay": "0.3s" }}>
-              <div className="info-icon"><FaClock /></div>
-              <h3>Response Time</h3>
-              <p className="info-value">Within 24 Hours</p>
-              <p className="info-desc">Quick turnaround guaranteed</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── MAIN CONTACT ────────────────────────────── */}
-      <section className="contact-main-section">
-        <div className="section-inner contact-main-inner">
-          <div className="contact-form-wrapper animate">
-            <div className="form-header">
-              <h2>Send Us a Message</h2>
-              <p>Fill in your details and we'll be in touch shortly</p>
-            </div>
-
-            {submitted ? (
-              <div className="contact-success">
-                <div className="success-icon">✓</div>
-                <h3>Message Sent Successfully!</h3>
-                <p>We've received your message and will get back to you within 24 hours.</p>
-                <p className="whatsapp-note">Opening WhatsApp for you...</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="contact-form-main">
-                <div className="form-row">
-                  <input
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                />
-
-                <select
-                  name="service"
-                  value={formData.service}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Select a Service</option>
-                  <option>Website Design</option>
-                  <option>E-Commerce</option>
-                  <option>Mobile App Development</option>
-                  <option>SEO & Growth</option>
-                  <option>Other</option>
-                </select>
-
-                <button type="submit" className="btn-primary full-width contact-submit">
-                  Send Message <FaArrowRight />
-                </button>
-              </form>
-            )}
-          </div>
-
-          <div className="contact-side animate" style={{ "--delay": "0.2s" }}>
-            <div className="contact-side-card">
-              <h3>Why Choose Us?</h3>
-              <ul className="why-list">
-                <li>✓ Expert team with 2+ years of experience</li>
-                <li>✓ 100% client satisfaction rate</li>
-                <li>✓ Quick turnaround times</li>
-                <li>✓ Post-launch support included</li>
-                <li>✓ Transparent communication</li>
-                <li>✓ Competitive pricing</li>
+            <div className="contact-reasons">
+              <h3>Why choose us</h3>
+              <ul>
+                {reasons.map((r) => (
+                  <li key={r}><FaCheckCircle /> {r}</li>
+                ))}
               </ul>
             </div>
+          </div>
 
-            <div className="contact-side-card">
-              <h3>Connect With Us</h3>
-              <div className="social-links-contact">
-                <button type="button" className="social-btn-contact"><FaLinkedin /></button>
-                <button type="button" className="social-btn-contact"><FaTwitter /></button>
-                <button type="button" className="social-btn-contact"><FaInstagram /></button>
-              </div>
-            </div>
+          <div className="card form-card">
+            <h3>Send us a message</h3>
+            <p>Fill in your details and we will be in touch shortly.</p>
+            <QuoteForm />
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 

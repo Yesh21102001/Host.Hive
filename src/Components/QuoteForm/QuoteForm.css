@@ -1,0 +1,72 @@
+.quote-form {
+  display: grid;
+  gap: 14px;
+}
+
+.quote-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.quote-form input,
+.quote-form select {
+  width: 100%;
+  padding: 15px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--dark-2);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quote-form input::placeholder { color: var(--muted); }
+
+.quote-form input:focus,
+.quote-form select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.quote-form select { color: var(--muted); }
+.quote-form select:valid { color: var(--ink); }
+
+.quote-form .btn { margin-top: 6px; }
+
+.quote-sent {
+  text-align: center;
+  padding: 24px 8px;
+}
+
+.quote-sent__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: var(--accent-2-soft);
+  color: var(--accent-2);
+  font-size: 1.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote-sent h3 { font-size: 1.4rem; margin-bottom: 10px; }
+.quote-sent p { color: var(--muted); }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .quote-form__row { grid-template-columns: 1fr; }
+}

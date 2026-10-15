@@ -1,0 +1,148 @@
+/* Service landing pages. Shared sections come from index.css and Home.css. */
+
+.sv-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+}
+
+/* ── Key facts strip ────────────────────────── */
+.sv-facts {
+  background: var(--dark-2);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 0;
+}
+
+.sv-facts__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.sv-fact {
+  display: grid;
+  gap: 6px;
+  padding-left: 20px;
+  border-left: 3px solid var(--accent);
+}
+
+.sv-fact__label {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sv-fact__value {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+/* ── Included cards ─────────────────────────── */
+.sv-included {
+  padding: 32px 28px;
+}
+
+.sv-included__icon {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.sv-included h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.sv-included p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ── Audience list ──────────────────────────── */
+.sv-audience {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.sv-audience li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 24px;
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.sv-audience svg {
+  color: var(--accent-2);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+/* ── Related services ───────────────────────── */
+.sv-related__title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 32px;
+}
+
+.sv-related {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 30px 32px;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sv-related:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+
+.sv-related svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.sv-related__label {
+  display: block;
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.sv-related strong {
+  color: var(--white);
+  font-size: 1.1rem;
+  font-family: var(--font-display);
+}
+
+@media (max-width: 640px) {
+  .sv-facts__grid { grid-template-columns: 1fr; }
+  .sv-actions .btn { width: 100%; }
+  .sv-included { padding: 26px 22px; }
+  .sv-related { padding: 24px 22px; }
+}
